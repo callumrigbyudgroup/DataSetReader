@@ -2,6 +2,8 @@
 using System.Data;
 using System.IO;
 using ExcelDataReader;
+using ExcelDataReader.Exceptions;
+using LumenWorks.Framework.IO.Csv;
 
 namespace DataSetReader
 {
@@ -16,10 +18,24 @@ namespace DataSetReader
 
         public DataSet AsDataSet()
         {
-            using (IExcelDataReader excelReader = ExcelReaderFactory.CreateReader(this.fileStream))
+            try
             {
-                return excelReader.AsDataSet();
+                using (IExcelDataReader excelReader = ExcelReaderFactory.CreateReader(this.fileStream))
+                {
+                    return excelReader.AsDataSet();
+                }
             }
+            catch (NotSupportedException)
+            {
+                using (var csvReader = new CsvReader(new StreamReader(this.fileStream), true))
+                {
+                    var ds = new DataSet();
+                    var dt = new DataTable();
+                    dt.Load(csvReader);
+                    ds.Tables.Add(dt);
+                    return ds;
+                }
+            }            
         }
     }
 }
