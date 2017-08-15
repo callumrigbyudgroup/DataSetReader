@@ -63,9 +63,32 @@ namespace DataSetReader.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] ExcelKeypad {
+        internal static byte[] BinaryExcelKeypad {
             get {
-                object obj = ResourceManager.GetObject("ExcelKeypad", resourceCulture);
+                object obj = ResourceManager.GetObject("BinaryExcelKeypad", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1,2,3
+        ///4,5,6
+        ///7,8,9
+        ///*,0,#
+        ///.
+        /// </summary>
+        internal static string CsvKeypad {
+            get {
+                return ResourceManager.GetString("CsvKeypad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] OpenXmlExcelKeypad {
+            get {
+                object obj = ResourceManager.GetObject("OpenXmlExcelKeypad", resourceCulture);
                 return ((byte[])(obj));
             }
         }

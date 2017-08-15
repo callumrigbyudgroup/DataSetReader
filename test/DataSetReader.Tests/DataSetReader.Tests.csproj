@@ -66,6 +66,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\keypad.csv" />
+    <None Include="Resources\keypad.xls" />
     <None Include="Resources\keypad.xlsx" />
   </ItemGroup>
   <ItemGroup>
