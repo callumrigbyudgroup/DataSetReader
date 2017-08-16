@@ -48,5 +48,10 @@ namespace DataSetReader.Tests
         {
             AssertDataSetIsNotEmpty(Encoding.UTF8.GetBytes(Resources.CsvKeypad));
         }
+        [TestCase]
+        public void WhenStreamIsAnExcelFileWithARandomExtensionAndNotEmpty_AsDataSet_ReturnsDataFromStreamAsADataSet()
+        {
+            AssertDataSetIsNotEmpty(Resources.FooExcelKeypad);
+        }
     }
 }

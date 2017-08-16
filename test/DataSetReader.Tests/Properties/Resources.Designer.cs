@@ -86,6 +86,16 @@ namespace DataSetReader.Tests.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
+        internal static byte[] FooExcelKeypad {
+            get {
+                object obj = ResourceManager.GetObject("FooExcelKeypad", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
         internal static byte[] OpenXmlExcelKeypad {
             get {
                 object obj = ResourceManager.GetObject("OpenXmlExcelKeypad", resourceCulture);
