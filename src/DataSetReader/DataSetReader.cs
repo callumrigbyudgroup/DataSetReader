@@ -9,9 +9,9 @@ namespace DataSetReader
 {
     public class DataSetReader
     {
-        private readonly Stream fileStream = null;
+        private readonly FileStream fileStream = null;
 
-        public DataSetReader(Stream fileStream)
+        public DataSetReader(FileStream fileStream)
         {
             this.fileStream = fileStream ?? throw new ArgumentNullException("fileStream");
         }
