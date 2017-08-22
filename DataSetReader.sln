@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.16
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetReader.Tests", "test\DataSetReader.Tests\DataSetReader.Tests.csproj", "{DDE4653E-6892-4E61-814E-3081B3F0B9E3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetReader", "src\DataSetReader\DataSetReader.csproj", "{35E20508-FFF4-4E81-BF4B-B28CB8189956}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetReader.Console", "src\DataSetReader.Console\DataSetReader.Console.csproj", "{3624F746-9CFF-4469-9217-BB77B1AD1FDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,8 +23,15 @@ Global
 		{35E20508-FFF4-4E81-BF4B-B28CB8189956}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{35E20508-FFF4-4E81-BF4B-B28CB8189956}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{35E20508-FFF4-4E81-BF4B-B28CB8189956}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3624F746-9CFF-4469-9217-BB77B1AD1FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3624F746-9CFF-4469-9217-BB77B1AD1FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3624F746-9CFF-4469-9217-BB77B1AD1FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3624F746-9CFF-4469-9217-BB77B1AD1FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26C5BF4E-E932-46AD-B427-33EA298518A8}
 	EndGlobalSection
 EndGlobal
