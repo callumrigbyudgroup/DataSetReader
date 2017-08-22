@@ -64,15 +64,22 @@ namespace DataSetReader
             using (var csvReader = new CsvReader(streamReader, false))
             {
                 var dataSet = new DataSet();
-                var table = new DataTable();
-
-                int fieldCount = csvReader.FieldCount;
-                table = AddColumns(table, fieldCount);
-                table = LoadData(table, csvReader);
+                DataTable table = CreateDataTableFromCsv(csvReader);
 
                 dataSet.Tables.Add(table);
                 return dataSet;
             }
+        }
+
+        private DataTable CreateDataTableFromCsv(CsvReader dataReader)
+        {
+            var table = new DataTable();
+
+            int fieldCount = dataReader.FieldCount;
+            table = AddColumns(table, fieldCount);
+            table = LoadData(table, dataReader);
+
+            return table;
         }
 
         private DataTable AddColumns(DataTable table, int count)
