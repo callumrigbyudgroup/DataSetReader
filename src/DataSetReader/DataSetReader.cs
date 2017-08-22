@@ -62,21 +62,24 @@ namespace DataSetReader
         {
             using (var streamReader = new StreamReader(this.fileStream))
             using (var csvReader = new CsvReader(streamReader, false))
-            {
-                var dataSet = new DataSet();
-                DataTable table = CreateDataTableFromCsv(csvReader);
+                return CreateDataSetFromCsv(csvReader);
+        }
 
-                dataSet.Tables.Add(table);
-                return dataSet;
-            }
+        private DataSet CreateDataSetFromCsv(CsvReader dataReader)
+        {
+            var dataSet = new DataSet();
+
+            DataTable table = CreateDataTableFromCsv(dataReader);
+            dataSet.Tables.Add(table);
+
+            return dataSet;
         }
 
         private DataTable CreateDataTableFromCsv(CsvReader dataReader)
         {
             var table = new DataTable();
-
-            int fieldCount = dataReader.FieldCount;
-            table = AddColumns(table, fieldCount);
+            
+            table = AddColumns(table, dataReader.FieldCount);
             table = LoadData(table, dataReader);
 
             return table;
