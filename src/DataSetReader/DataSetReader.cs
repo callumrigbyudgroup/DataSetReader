@@ -2,7 +2,6 @@
 using System.Data;
 using System.IO;
 using ExcelDataReader;
-using ExcelDataReader.Exceptions;
 using LumenWorks.Framework.IO.Csv;
 
 namespace DataSetReader
@@ -22,24 +21,58 @@ namespace DataSetReader
 
             try
             {
-                using (IExcelDataReader excelReader = ExcelReaderFactory.CreateReader(this.fileStream))
-                    dataSet = excelReader.AsDataSet();
+                switch (GetFileExtension())
+                {
+                    case ".xls":
+                    case ".xlb":
+                    case ".xlm":
+                    case ".xlsx":
+                    case ".xlsb":
+                    case ".xlsm":
+                    default:
+                        dataSet = ReadExcelToDataSet();
+                        break;
+                    case ".csv":
+                    case ".txt":
+                        dataSet = ReadCsvToDataSet();
+                        break;
+                }
+                
             }
             catch (NotSupportedException)
             {
-                using (var csvReader = new CsvReader(new StreamReader(this.fileStream), false))
-                {
-                    var dt = new DataTable();
-
-                    int fieldCount = csvReader.FieldCount;
-                    dt = AddColumns(dt, fieldCount);
-                    dt = LoadData(dt, csvReader);
-
-                    dataSet.Tables.Add(dt);
-                }
+                dataSet = ReadCsvToDataSet();
             }
 
             return dataSet;
+        }
+
+        private string GetFileExtension()
+        {
+            return Path.GetExtension(this.fileStream.Name);
+        }
+
+        private DataSet ReadExcelToDataSet()
+        {
+            using (IExcelDataReader excelReader = ExcelReaderFactory.CreateReader(this.fileStream))
+                return excelReader.AsDataSet();
+        }
+
+        private DataSet ReadCsvToDataSet()
+        {
+            using (var streamReader = new StreamReader(this.fileStream))
+            using (var csvReader = new CsvReader(streamReader, false))
+            {
+                var dataSet = new DataSet();
+                var table = new DataTable();
+
+                int fieldCount = csvReader.FieldCount;
+                table = AddColumns(table, fieldCount);
+                table = LoadData(table, csvReader);
+
+                dataSet.Tables.Add(table);
+                return dataSet;
+            }
         }
 
         private DataTable AddColumns(DataTable table, int count)

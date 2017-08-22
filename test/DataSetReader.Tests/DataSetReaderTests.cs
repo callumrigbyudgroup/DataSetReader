@@ -26,7 +26,7 @@ namespace DataSetReader.Tests
         private void AssertDataSetIsNotEmpty(string fileName)
         {
             DataSet result = null;
-            string path = GetFilePathFromResources(fileName);
+            string path = GetResourceFilePath(fileName);
             using (FileStream testStream = File.Open(path, FileMode.Open, FileAccess.Read))
             {
                 var reader = new DataSetReader(testStream);
@@ -37,7 +37,7 @@ namespace DataSetReader.Tests
             Assert.Greater(result.Tables.Count, 0);
         }
 
-        private string GetFilePathFromResources(string fileName)
+        private string GetResourceFilePath(string fileName)
         {
             return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ConfigurationManager.AppSettings["TestResourcesPath"], fileName);
         }
