@@ -6,11 +6,11 @@ using AppConsole = System.Console;
 
 namespace DataSetReader.Console
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            string path = @"\\UDSERVER\Development\UDMatrix Imports\_____Matrix Files - All Clients\Total Gas and Power\2017-08-16\UD Group\TPI Matrix 16.08.17.xlsx";
+            const string path = @"\\UDSERVER\Development\UDMatrix Imports\_____Matrix Files - All Clients\Total Gas and Power\2017-08-16\UD Group\TPI Matrix 16.08.17.xlsx";
             try
             {
                 DataSet result = ConvertToDataSet(path);

@@ -8,11 +8,11 @@ namespace DataSetReader
 {
     public class DataSetReader
     {
-        private readonly FileStream fileStream = null;
+        private readonly FileStream fileStream;
 
         public DataSetReader(FileStream fileStream)
         {
-            this.fileStream = fileStream ?? throw new ArgumentNullException("fileStream");
+            this.fileStream = fileStream ?? throw new ArgumentNullException(nameof(fileStream));
         }
 
         public DataSet AsDataSet()
@@ -23,12 +23,6 @@ namespace DataSetReader
             {
                 switch (GetFileExtension())
                 {
-                    case ".xls":
-                    case ".xlb":
-                    case ".xlm":
-                    case ".xlsx":
-                    case ".xlsb":
-                    case ".xlsm":
                     default:
                         dataSet = ReadExcelToDataSet();
                         break;
@@ -37,7 +31,6 @@ namespace DataSetReader
                         dataSet = ReadCsvToDataSet();
                         break;
                 }
-                
             }
             catch (NotSupportedException)
             {
@@ -49,18 +42,18 @@ namespace DataSetReader
 
         private string GetFileExtension()
         {
-            return Path.GetExtension(this.fileStream.Name);
+            return Path.GetExtension(fileStream.Name);
         }
 
         private DataSet ReadExcelToDataSet()
         {
-            using (IExcelDataReader excelReader = ExcelReaderFactory.CreateReader(this.fileStream))
+            using (IExcelDataReader excelReader = ExcelReaderFactory.CreateReader(fileStream))
                 return excelReader.AsDataSet();
         }
 
         private DataSet ReadCsvToDataSet()
         {
-            using (var streamReader = new StreamReader(this.fileStream))
+            using (var streamReader = new StreamReader(fileStream))
             using (var csvReader = new CsvReader(streamReader, false))
                 return CreateDataSetFromCsv(csvReader);
         }
@@ -78,7 +71,7 @@ namespace DataSetReader
         private DataTable CreateDataTableFromCsv(CsvReader dataReader)
         {
             var table = new DataTable();
-            
+
             table = AddColumns(table, dataReader.FieldCount);
             table = LoadData(table, dataReader);
 
